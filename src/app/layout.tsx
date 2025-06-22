@@ -5,7 +5,7 @@ import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
+  : "https://messages-supabase.vercel.app/auth/login";
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
