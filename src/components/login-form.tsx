@@ -55,7 +55,7 @@ export function LoginForm({
     setIsLoading(true);
     setError(null);
     try {
-      const { error } = await supabase.auth.signInWithOAuth({
+      const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
           redirectTo: `${window.location.origin}/auth/callback`,
@@ -66,6 +66,13 @@ export function LoginForm({
         },
       });
       if (error) throw error;
+
+      // The user will be redirected to the Google login page.
+      // After successful login, they will be redirected back to the callback URL.
+      // You can handle the session in the callback route.
+      if (data?.url) {
+        window.location.href = data.url;
+      }
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
